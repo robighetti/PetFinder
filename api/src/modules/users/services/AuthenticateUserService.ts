@@ -3,6 +3,9 @@ import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 
 import User from '../infra/typeorm/entities/User';
+import authConfig from '../../../configs/auth';
+
+import AppError from '../../../shared/errors/AppError';
 
 interface IRequest {
   email: string;
@@ -21,19 +24,20 @@ class AuthenticateUserService {
     const user = await userRepository.findOne({ where: { email } });
 
     if (!user) {
-      throw new Error('Incorrect email/password combination');
+      throw new AppError('Incorrect email/password combination', 401);
     }
 
     const passwordCheck = await compare(password, user.password);
 
     if (!passwordCheck) {
-      throw new Error('Incorrect email/password combination');
+      throw new AppError('Incorrect email/password combination', 401);
     }
 
-    /* secret -> petFinderIBM2020@ */
-    const token = sign({}, 'c763a68a5fbdf2f57288289e4aac5108', {
+    const { secret, expiresIn } = authConfig.jwt;
+
+    const token = sign({}, secret, {
       subject: user.id,
-      expiresIn: '1d',
+      expiresIn,
     });
 
     return { user, token };

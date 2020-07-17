@@ -31,6 +31,9 @@ class Pet {
   city: string;
 
   @Column()
+  photo: string;
+
+  @Column()
   user_id: string;
 
   @ManyToOne(() => User)

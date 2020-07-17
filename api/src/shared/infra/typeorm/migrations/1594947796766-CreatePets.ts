@@ -43,6 +43,11 @@ export class CreatePets1594947796766 implements MigrationInterface {
             type: 'uuid',
           },
           {
+            name: 'photo',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
