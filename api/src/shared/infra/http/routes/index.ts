@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
-import userRouter from '../../../../modules/users/infra/http/routes/users.routes';
-import petsRouter from '../../../../modules/pets/infra/http/routes/pets.routes';
-import sessionsRouter from '../../../../modules/users/infra/http/routes/sessions.routes';
+import userRouter from '@modules/users/infra/http/routes/users.routes';
+import petsRouter from '@modules/pets/infra/http/routes/pets.routes';
+import sessionsRouter from '@modules/users/infra/http/routes/sessions.routes';
 
 const routes = Router();
 
