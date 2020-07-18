@@ -70,7 +70,7 @@ const SignIn: React.FC<MenuProps> = ({ setLogin }) => {
 
   const handleLogin = useCallback(() => {
     setLogin(false);
-  }, [signIn, addToast, history]);
+  }, [signIn, addToast]);
 
   return (
     <Container>
