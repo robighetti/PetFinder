@@ -9,22 +9,28 @@ import { useAuth } from '../../hooks/auth';
 import { Container, Content, Header, Menu } from './styled';
 
 const Dashboard: React.FC = () => {
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
   return (
     <Container>
       <Content>
         <Header>
-          <strong>Rodrigo Bighetti</strong>
+          <strong>{user.name}</strong>
           <a href="#" onClick={() => {}}>
             <FiEdit />
             Meu perfil
           </a>
           <img
-            src="https://ui-avatars.com/api/?font-size=0.40&background=0030ff&color=fff&name=Rodrigo Bighetti"
+            src={
+              user.avatar_url
+                ? user.avatar_url
+                : `https://ui-avatars.com/api/?font-size=0.40&background=0030ff&color=fff&name=${user.name}`
+            }
             alt="Rodrigo Bighetti"
           />
 
-          <span>Piracicaba - São Paulo</span>
+          <span>
+            {user.city} - {user.state}
+          </span>
           <hr />
         </Header>
 
