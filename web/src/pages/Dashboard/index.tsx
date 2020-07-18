@@ -4,9 +4,12 @@ import { FiEdit, FiLogOut } from 'react-icons/fi';
 import Button from '../../components/Button';
 import PetList from '../PetList';
 
+import { useAuth } from '../../hooks/auth';
+
 import { Container, Content, Header, Menu } from './styled';
 
 const Dashboard: React.FC = () => {
+  const { signOut } = useAuth();
   return (
     <Container>
       <Content>
@@ -27,7 +30,7 @@ const Dashboard: React.FC = () => {
 
         <Menu>
           <Button>Cadastrar Pet</Button>
-          <Button>
+          <Button onClick={signOut}>
             <FiLogOut />
             Sair
           </Button>
