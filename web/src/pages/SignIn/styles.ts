@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const Container = styled.div`
   position: absolute;
@@ -22,6 +22,22 @@ export const Content = styled.div`
 
   padding: 24px;
   border-radius: 10px;
+`;
+
+const moveFromLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+export const AnimationContainer = styled.div`
+  animation: ${moveFromLeft} 1s;
 
   h1 {
     text-align: center;
