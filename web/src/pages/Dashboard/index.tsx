@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FiEdit, FiLogOut } from 'react-icons/fi';
 
 import Button from '../../components/Button';
 import PetList from '../PetList';
+import Profile from '../Profile';
 
 import { useAuth } from '../../hooks/auth';
 
@@ -10,12 +11,15 @@ import { Container, Content, Header, Menu } from './styled';
 
 const Dashboard: React.FC = () => {
   const { signOut, user } = useAuth();
+  const [open, setOpen] = useState(false);
+
   return (
     <Container>
+      {open && <Profile setOpen={setOpen} />}
       <Content>
         <Header>
           <strong>{user.name}</strong>
-          <a href="#" onClick={() => {}}>
+          <a href="#" onClick={() => setOpen(true)}>
             <FiEdit />
             Meu perfil
           </a>

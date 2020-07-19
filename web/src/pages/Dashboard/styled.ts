@@ -44,8 +44,8 @@ export const Header = styled.div`
 
   img {
     margin: 36px 0;
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
   }
 
