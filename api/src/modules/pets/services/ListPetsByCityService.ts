@@ -1,7 +1,6 @@
 import { injectable, inject } from 'tsyringe';
 
-import Pet from '@modules/pets/infra/typeorm/entities/Pet';
-
+import IPetListAllDTO from '@modules/pets/dtos/IPetListAllDTO';
 import IPetsRepository from '@modules/pets/repositories/IPetsRepository';
 
 @injectable()
@@ -11,7 +10,7 @@ class ListPetsByCityService {
     private petsRepository: IPetsRepository,
   ) {}
 
-  public async execute(city: string): Promise<Pet[] | undefined> {
+  public async execute(city: string): Promise<IPetListAllDTO[] | undefined> {
     const pets = await this.petsRepository.listPetsByCity(city);
 
     return pets;

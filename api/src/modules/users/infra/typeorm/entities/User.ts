@@ -4,9 +4,11 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   CreateDateColumn,
+  OneToMany,
 } from 'typeorm';
 
 import { Exclude, Expose } from 'class-transformer';
+import Pet from '@modules/pets/infra/typeorm/entities/Pet';
 
 @Entity('users')
 class User {
@@ -37,6 +39,9 @@ class User {
 
   @Column()
   avatar: string;
+
+  @OneToMany(type => Pet, user => User)
+  pets: Pet[];
 
   @CreateDateColumn()
   created_at: Date;

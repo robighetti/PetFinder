@@ -3,6 +3,7 @@ import { getRepository, Repository, DeleteResult } from 'typeorm';
 import Pet from '@modules/pets/infra/typeorm/entities/Pet';
 
 import IPetCreateDTO from '@modules/pets/dtos/IPetCreateDTO';
+import IPetListAllDTO from '@modules/pets/dtos/IPetListAllDTO';
 import IPetsRepository from '@modules/pets/repositories/IPetsRepository';
 
 class PetsRepository implements IPetsRepository {
@@ -18,16 +19,21 @@ class PetsRepository implements IPetsRepository {
     return pet;
   }
 
-  public async listAllPets(): Promise<Pet[] | undefined> {
+  public async listAllPets(): Promise<IPetListAllDTO[] | undefined> {
     const pets = await this.ormRepository.find();
 
     return pets;
   }
 
-  public async listPetsByCity(city: string): Promise<Pet[] | undefined> {
+  public async listPetsByCity(
+    city: string,
+  ): Promise<IPetListAllDTO[] | undefined> {
     const pets = await this.ormRepository.find({
+      //relations: ['users'],
       where: { city },
     });
+
+    console.log(pets);
 
     return pets;
   }
