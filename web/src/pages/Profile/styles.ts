@@ -18,7 +18,7 @@ export const Container = styled.div`
 export const Content = styled.div`
   position: relative;
   width: 700px;
-  height: 100vh;
+
   background: #fff;
 
   padding: 16px;
@@ -57,8 +57,8 @@ export const AnimationContainer = styled.div`
 `;
 
 export const Close = styled.button`
-  top: -2px;
-  right: -2px;
+  top: 10px;
+  right: 10px;
   position: absolute;
   width: 25px;
   height: 25px;

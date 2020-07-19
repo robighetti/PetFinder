@@ -49,13 +49,13 @@ export const AnimationContainer = styled.div`
 `;
 
 export const Close = styled.button`
-  top: -12px;
-  right: -12px;
+  top: 0;
+  right: 0;
   position: absolute;
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: #fa6363;
+  background: transparent;
   border: 0;
   transition: all 0.2s;
   display: flex;
@@ -64,5 +64,6 @@ export const Close = styled.button`
 
   &:hover {
     transform: scale(1.1);
+    color: #c53030;
   }
 `;
