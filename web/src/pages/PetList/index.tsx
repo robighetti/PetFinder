@@ -16,6 +16,8 @@ import { useToast } from '../../hooks/toast';
 
 import api from '../../services/api';
 
+import View from './view';
+
 import {
   Container,
   Actions,
@@ -30,7 +32,8 @@ interface UserProps {
   state: string;
 }
 
-interface PetProps {
+export interface PetProps {
+  id: string;
   name: string;
   race: string;
   age: number;
@@ -46,6 +49,8 @@ const PetList: React.FC = () => {
   const [pets, setPets] = useState<PetProps[]>([]);
   const { user } = useAuth();
   const { refresh } = useToast();
+  const [openView, setOpenView] = useState(false);
+  const [pet, setPet] = useState<PetProps>({} as PetProps);
 
   useEffect(() => {
     async function loadPets() {
@@ -63,8 +68,14 @@ const PetList: React.FC = () => {
     loadPets();
   }, [user, refresh]);
 
+  const handleView = useCallback((data) => {
+    setPet(data);
+    setOpenView(true);
+  }, []);
+
   return (
     <Container>
+      {openView && <View pet={pet} setOpenView={setOpenView} />}
       <h1>Precisamos de um lar</h1>
 
       <TableContainer component={Paper}>
@@ -82,7 +93,7 @@ const PetList: React.FC = () => {
           </TableHead>
           <TableBody>
             {pets.map((pet) => (
-              <StyledTableRow key={1}>
+              <StyledTableRow key={pet.id}>
                 <StyledTableCell align="left">{pet.name}</StyledTableCell>
                 <StyledTableCell align="right">{pet.race}</StyledTableCell>
                 <StyledTableCell align="right">{pet.age} anos</StyledTableCell>
@@ -100,7 +111,7 @@ const PetList: React.FC = () => {
                     </button>
 
                     {user && (
-                      <button type="button">
+                      <button type="button" onClick={() => handleView(pet)}>
                         <FiEye size={22} />
                       </button>
                     )}

@@ -128,7 +128,14 @@ const Profile: React.FC<MenuProps> = ({ setOpen }) => {
         <AnimationContainer>
           <Form initialData={user} ref={formRef} onSubmit={handleSubmit}>
             <AvatarInput>
-              <img src={user.avatar_url} alt={user.name} />
+              <img
+                src={
+                  user.avatar_url
+                    ? user.avatar_url
+                    : `https://ui-avatars.com/api/?font-size=0.40&background=0030ff&color=fff&name=${user.name}`
+                }
+                alt={user.name}
+              />
               <label htmlFor="avatar">
                 <FiCamera />
                 <input type="file" id="avatar" onChange={handleAvatarChange} />
