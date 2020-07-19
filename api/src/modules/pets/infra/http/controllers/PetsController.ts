@@ -35,7 +35,7 @@ class PetsController {
   public async create(request: Request, response: Response): Promise<Response> {
     const createPet = container.resolve(CreatePetsService);
 
-    const { name, race, age, weight, city, user_id } = request.body;
+    const { name, race, age, weight, city } = request.body;
 
     const pet = await createPet.execute({
       name,
@@ -43,7 +43,7 @@ class PetsController {
       age,
       weight,
       city,
-      user_id,
+      user_id: request.user.id,
     });
 
     return response.json(pet);
@@ -51,7 +51,7 @@ class PetsController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const { name, race, age, weight, city, user_id } = request.body;
+    const { name, race, age, weight, city } = request.body;
 
     const updateService = container.resolve(UpdatePetService);
 
@@ -62,7 +62,7 @@ class PetsController {
       age,
       weight,
       city,
-      user_id,
+      user_id: request.user.id,
     });
 
     return response.json(pet);
