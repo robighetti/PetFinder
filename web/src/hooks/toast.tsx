@@ -6,6 +6,7 @@ import ToastContainer from '../components/ToastContainer';
 interface ToastContextData {
   addToast(message: Omit<ToastMessage, 'id'>): void;
   removeToast(id: string): void;
+  refresh: boolean;
 }
 
 export interface ToastMessage {
@@ -18,6 +19,7 @@ export interface ToastMessage {
 const ToastContext = createContext<ToastContextData>({} as ToastContextData);
 
 const ToastProvider: React.FC = ({ children }) => {
+  const [refresh, setRefresh] = useState(false);
   const [messages, setMessages] = useState<ToastMessage[]>([]);
 
   const addToast = useCallback(
@@ -32,6 +34,7 @@ const ToastProvider: React.FC = ({ children }) => {
       };
 
       setMessages((oldMessages) => [...oldMessages, toast]);
+      setRefresh(!refresh);
     },
     [],
   );
@@ -41,7 +44,7 @@ const ToastProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <ToastContext.Provider value={{ addToast, removeToast }}>
+    <ToastContext.Provider value={{ addToast, removeToast, refresh }}>
       {children}
       <ToastContainer messages={messages} />
     </ToastContext.Provider>

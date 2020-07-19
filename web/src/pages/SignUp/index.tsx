@@ -89,14 +89,10 @@ const SignUp: React.FC<MenuProps> = ({ setSignUp }) => {
     [addToast, history],
   );
 
-  const handleSignUp = useCallback(() => {
-    setSignUp(false);
-  }, []);
-
   return (
     <Container>
       <Content>
-        <Close type="button" onClick={handleSignUp}>
+        <Close type="button" onClick={() => setSignUp(false)}>
           <MdClose size={20} />
         </Close>
         <AnimationContainer>

@@ -4,6 +4,7 @@ import { FiEdit, FiLogOut } from 'react-icons/fi';
 import Button from '../../components/Button';
 import PetList from '../PetList';
 import Profile from '../Profile';
+import Pet from '../Pet';
 
 import { useAuth } from '../../hooks/auth';
 
@@ -12,10 +13,12 @@ import { Container, Content, Header, Menu } from './styled';
 const Dashboard: React.FC = () => {
   const { signOut, user } = useAuth();
   const [open, setOpen] = useState(false);
+  const [pets, setPets] = useState(false);
 
   return (
     <Container>
       {open && <Profile setOpen={setOpen} />}
+      {pets && <Pet setPets={setPets} />}
       <Content>
         <Header>
           <strong>{user.name}</strong>
@@ -39,7 +42,7 @@ const Dashboard: React.FC = () => {
         </Header>
 
         <Menu>
-          <Button>Cadastrar Pet</Button>
+          <Button onClick={() => setPets(true)}>Cadastrar Pet</Button>
           <Button onClick={signOut}>
             <FiLogOut />
             Sair
