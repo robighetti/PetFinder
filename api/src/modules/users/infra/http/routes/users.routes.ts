@@ -23,4 +23,6 @@ usersRouter.patch(
 
 usersRouter.put('/', Authenticate, usersController.update);
 
+usersRouter.post('/email', Authenticate, usersController.sendEmail);
+
 export default usersRouter;

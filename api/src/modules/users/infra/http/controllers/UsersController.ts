@@ -4,6 +4,7 @@ import { classToClass } from 'class-transformer';
 
 import CreateUserService from '@modules/users/services/CreateUserService';
 import UpdateUserService from '@modules/users/services/UpdateUserService';
+import SendContactEmailService from '@modules/users/services/SendContactEmailService';
 
 class UsersController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -41,6 +42,23 @@ class UsersController {
     });
 
     return response.json(classToClass(user));
+  }
+
+  public async sendEmail(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const { petUserName, petEmail } = request.body;
+
+    const sendEmailService = container.resolve(SendContactEmailService);
+
+    await sendEmailService.execute({
+      user_id: request.user.id,
+      petUserName,
+      petEmail,
+    });
+
+    return response.json({ ok: true });
   }
 }
 
