@@ -11,11 +11,15 @@ class DeletePetService {
     private petsRepository: IPetsRepository,
   ) {}
 
-  public async execute(id: string): Promise<DeleteResult> {
+  public async execute(id: string, user_id: string): Promise<DeleteResult> {
     const pet = await this.petsRepository.findPetById(id);
 
     if (!pet) {
       throw new AppError('Pet not found');
+    }
+
+    if (pet.user_id !== user_id) {
+      throw new AppError('Operation not permited');
     }
 
     return this.petsRepository.delete(id);

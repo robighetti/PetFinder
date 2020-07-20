@@ -70,10 +70,11 @@ class PetsController {
 
   public async delete(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
+    const user_id = request.user.id;
 
     const deleteService = container.resolve(DeletePetService);
 
-    const pet = await deleteService.execute(id);
+    const pet = await deleteService.execute(id, user_id);
 
     return response.json(pet);
   }
