@@ -64,11 +64,15 @@ export const ListItem = styled.li`
 `;
 
 export const Actions = styled.div`
+  width: 100%;
   margin-right: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   button {
     border: 0;
-    margin-right: 16px;
     background: transparent;
     transition: all 0.2s;
 

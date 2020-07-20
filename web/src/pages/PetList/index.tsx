@@ -53,6 +53,7 @@ const PetList: React.FC = () => {
   const [openView, setOpenView] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
+  const [openEmail, setOpenEmail] = useState(false);
   const [pet, setPet] = useState<PetProps>({} as PetProps);
 
   useEffect(() => {
@@ -84,6 +85,20 @@ const PetList: React.FC = () => {
   const handleDelete = useCallback((data) => {
     setPet(data);
     setOpenDelete(true);
+  }, []);
+
+  const handleEmail = useCallback(async (data) => {
+    setPet(data);
+    setOpenEmail(true);
+
+    await api.post('/users/email', {
+      petUserName: data.name,
+      petEmail: data.user.email,
+    });
+
+    alert(
+      'O proprietário do Pet foi notificado por email ! Logo ele entrará em contato',
+    );
   }, []);
 
   return (
@@ -119,11 +134,13 @@ const PetList: React.FC = () => {
                   {pet.city}/{pet.user.state}
                 </StyledTableCell>
                 <StyledTableCell align="right">{pet.user.name}</StyledTableCell>
-                <StyledTableCell align="right">
+                <StyledTableCell align="center">
                   <Actions>
-                    <button type="button">
-                      <FiMail size={22} />
-                    </button>
+                    {user && (
+                      <button type="button" onClick={() => handleEmail(pet)}>
+                        <FiMail size={22} />
+                      </button>
+                    )}
 
                     <button type="button" onClick={() => handleView(pet)}>
                       <FiEye size={22} />

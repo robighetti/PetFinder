@@ -28,7 +28,6 @@ const Edit: React.FC<EditProps> = ({ setOpenEdit, pet }) => {
 
   const handleSubmit = useCallback(
     async (data: PetProps) => {
-      console.log(data);
       try {
         formRef.current?.setErrors({});
 
