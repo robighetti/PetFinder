@@ -19,7 +19,7 @@ To start this application you need to have some requirements and follow the proc
 - [Yarn - 1.22.4 (opcional)](https://yarnpkg.com/)
 - [Docker](https://docs.docker.com/get-docker/)
 
-## Instalação
+## Installation
 
 ```
 To be able to run the API it is necessary to create an instance in the docker with postgres, to do this just execute the command below:
