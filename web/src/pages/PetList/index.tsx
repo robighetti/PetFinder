@@ -5,7 +5,6 @@ import { FiEye, FiEdit, FiDelete, FiMail } from 'react-icons/fi';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
@@ -17,6 +16,8 @@ import { useToast } from '../../hooks/toast';
 import api from '../../services/api';
 
 import View from './view';
+import Edit from './edit';
+import Delete from './delete';
 
 import {
   Container,
@@ -50,6 +51,8 @@ const PetList: React.FC = () => {
   const { user } = useAuth();
   const { refresh } = useToast();
   const [openView, setOpenView] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
   const [pet, setPet] = useState<PetProps>({} as PetProps);
 
   useEffect(() => {
@@ -73,9 +76,21 @@ const PetList: React.FC = () => {
     setOpenView(true);
   }, []);
 
+  const handleEdit = useCallback((data) => {
+    setPet(data);
+    setOpenEdit(true);
+  }, []);
+
+  const handleDelete = useCallback((data) => {
+    setPet(data);
+    setOpenDelete(true);
+  }, []);
+
   return (
     <Container>
       {openView && <View pet={pet} setOpenView={setOpenView} />}
+      {openEdit && <Edit pet={pet} setOpenEdit={setOpenEdit} />}
+      {openDelete && <Delete pet={pet} setOpenDelete={setOpenDelete} />}
       <h1>Precisamos de um lar</h1>
 
       <TableContainer component={Paper}>
@@ -110,20 +125,18 @@ const PetList: React.FC = () => {
                       <FiMail size={22} />
                     </button>
 
-                    {user && (
-                      <button type="button" onClick={() => handleView(pet)}>
-                        <FiEye size={22} />
-                      </button>
-                    )}
+                    <button type="button" onClick={() => handleView(pet)}>
+                      <FiEye size={22} />
+                    </button>
 
                     {user && (
-                      <button type="button">
+                      <button type="button" onClick={() => handleEdit(pet)}>
                         <FiEdit size={22} />
                       </button>
                     )}
 
                     {user && (
-                      <button type="button">
+                      <button type="button" onClick={() => handleDelete(pet)}>
                         <FiDelete size={22} color="#c53030" />
                       </button>
                     )}

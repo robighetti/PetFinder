@@ -32,7 +32,7 @@ const Dashboard: React.FC = () => {
                 ? user.avatar_url
                 : `https://ui-avatars.com/api/?font-size=0.40&background=0030ff&color=fff&name=${user.name}`
             }
-            alt="Rodrigo Bighetti"
+            alt={user.name}
           />
 
           <span>

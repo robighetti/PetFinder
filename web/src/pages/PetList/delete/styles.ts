@@ -16,24 +16,23 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   position: relative;
-  width: 500px;
+  width: 700px;
 
   background: #fff;
 
   padding: 16px;
   border-radius: 10px;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  img {
-    width: 350px;
+  h1 {
+    font-size: 28px;
   }
 
-  label {
-    align-self: flex-start;
-    font-size: 22px;
+  > div {
+    display: flex;
+
+    button {
+      margin: 10px;
+    }
   }
 `;
 
